@@ -1,0 +1,101 @@
+﻿@model IEnumerable<SeguimientoPagos.Models.Pago>
+
+@{
+    ViewData["Title"] = "Pagos realizados";
+}
+
+<h1>Historial de pagos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Agregar un nuevo pago</a>
+    <a asp-action="Download" class="btn btn-info">Descargar pagos</a>
+</p>
+
+<form asp-controller="Pagos" asp-action="Index">
+    <p>
+        Buscar:<input type="text" name="buscar" class="form-text" />
+        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+    </p>
+</form>
+
+<form asp-action="DeleteMultipleConfirmation" method="post" id="deleteForm">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" id="checkAll" />
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Folio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Cantidad)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedIds" value="@item.Id" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Folio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.Id">Detalles</a> |
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-danger" id="deleteBtn" disabled>Eliminar seleccionados</button>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var checkboxes = document.getElementsByName('selectedIds');
+            var deleteBtn = document.getElementById('deleteBtn');
+            var checkAll = document.getElementById('checkAll');
+
+            // Función para manejar el cambio de estado de las casillas de verificación
+            function handleCheckboxChange() {
+                var atLeastOneChecked = Array.from(checkboxes).some(x => x.checked);
+                deleteBtn.disabled = !atLeastOneChecked;
+            }
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', handleCheckboxChange);
+            });
+
+            // Función para manejar la casilla de selección de todos
+            checkAll.onclick = function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = this.checked;
+                });
+                handleCheckboxChange();
+            };
+        });
+    </script>
+}

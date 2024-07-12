@@ -1,0 +1,51 @@
+﻿@model List<SeguimientoPagos.Models.Pago>
+
+@{
+    ViewData["Title"] = "Delete Multiple";
+}
+
+<h1>Eliminacion de varios pagos</h1>
+
+<h3>¿Estás seguro de que quieres eliminar los siguientes pagos?</h3>
+
+@foreach (var pago in Model)
+{
+    <div>
+        <h4>Pago ID: @pago.Id</h4>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => pago.Folio)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => pago.Folio)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => pago.Descripcion)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => pago.Descripcion)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => pago.Fecha)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => pago.Fecha)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => pago.Cantidad)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => pago.Cantidad)
+            </dd>
+        </dl>
+    </div>
+}
+
+<form asp-action="DeleteMultiple">
+    @foreach (var pago in Model)
+    {
+        <input type="hidden" asp-for="@pago.Id" />
+    }
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Index" class="btn btn-primary">Regresar</a>
+</form>

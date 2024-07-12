@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: url('/images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            text-align: center;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 50px auto;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Añadir sombra */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+            .feature img {
+                width: 50px;
+                height: 50px;
+                margin-right: 20px;
+            }
+
+            .feature p {
+                font-size: 1.2em;
+                line-height: 1.5;
+                margin: 0;
+            }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido a Seguimiento de Pagos</h1>
+        <div class="content">
+            <div class="feature">
+                <img src="/images/create.png" alt="Crear">
+                <p>Crear y editar registros de pagos.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/details.png" alt="Detalles">
+                <p>Ver detalles específicos de cada pago.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/delete.png" alt="Eliminar">
+                <p>Eliminar pagos según sea necesario.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/manage.png" alt="Gestionar">
+                <p>Gestionar múltiples pagos a la vez.</p>
+            </div>
+            <p>Navega por el sistema utilizando el menú superior para acceder a las diferentes funcionalidades.</p>
+            <div class="button-container">
+                <a href="@Url.Action("Index", "Pagos")" class="btn">Ir a la Sección de Pagos</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
